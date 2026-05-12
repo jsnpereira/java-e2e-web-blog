@@ -1,0 +1,29 @@
+name: teste e2e - Web agi Blog
+
+on:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Instalar Google chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Instalar dependencias
+        run: mvn dependency:resolve
+      - name: Rodar os testes
+        run: mvn test
+      - name: Publicar o relatório
+        if: always()
+        uses: action/upload-artifact@v4
+        with:
+            name: relatorio-cucumber
+            path: target/cucumber-reports/
+
