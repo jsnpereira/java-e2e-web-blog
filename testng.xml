@@ -1,0 +1,7 @@
+<suite name="Suite de Testes">
+    <test name="Testes Cucumber">
+        <classes>
+            <class name="TestRunner"/>
+        </classes>
+    </test>
+</suite>
