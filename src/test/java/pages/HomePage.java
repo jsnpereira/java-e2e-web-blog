@@ -33,8 +33,7 @@ public class HomePage {
     }
 
     public void homePageTituloExibido() {
-        WebElement element = driver.findElement(homePageTitle);
-        wait.until(driver -> element.isDisplayed());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(homePageTitle));
     }
 
     public void passaSobreMenuCalculadoras () {
@@ -43,9 +42,8 @@ public class HomePage {
     }
 
     public void clicarSubmenuJurosComposto () {
-        WebElement element = driver.findElement(jurosCompostoSubmenu);
-        wait.until(driver -> element.isDisplayed());
-        element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(jurosCompostoSubmenu));
+        driver.findElement(jurosCompostoSubmenu).click();
     }
 
     public void loading() {
