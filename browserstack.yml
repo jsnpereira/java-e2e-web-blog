@@ -1,0 +1,16 @@
+userName: SEU_USERNAME
+accessKey: SUA_ACCESS_KEY
+
+browsers:
+  - browserName: chrome
+    browserVersion: latest
+    os: Windows
+    osVersion: 11
+
+buildName: "Blog Agibank E2E"
+projectName: "test-web-blog"
+sessionName: "automation test"
+
+local: false
+debug: true
+networkLogs: true

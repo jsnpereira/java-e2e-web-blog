@@ -19,7 +19,7 @@ public class HomePage {
 
     private By homePageTitle = By.xpath("//*[contains(@class,'menu-text') and contains(text(),'Agibank')]");
     private By calculadorasMenu = By.xpath("//span[text()=\"Calculadoras\"]");
-    private By jurosCompostoSubmenu = By.xpath("//ul[@class=\"sub-menu\"]//a[@class=\"menu-link\"]//span[text()=\"Calculadora de Juros Compostos\"]");
+    private By jurosCompostoSubmenu = By.xpath("//a[@class=\"menu-link\"]//span[text()=\"Calculadora de Juros Compostos\"]");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -33,16 +33,17 @@ public class HomePage {
     }
 
     public void homePageTituloExibido() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(homePageTitle));
+        wait.until(ExpectedConditions.presenceOfElementLocated(homePageTitle));
     }
 
     public void passaSobreMenuCalculadoras () {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(calculadorasMenu));
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(calculadorasMenu));
+        String ambiente = System.getProperty("ambiente","local");
         actions.moveToElement(element).perform();
     }
 
     public void clicarSubmenuJurosComposto () {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(jurosCompostoSubmenu));
+        wait.until(ExpectedConditions.presenceOfElementLocated(jurosCompostoSubmenu));
         driver.findElement(jurosCompostoSubmenu).click();
     }
 

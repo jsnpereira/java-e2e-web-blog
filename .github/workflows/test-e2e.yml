@@ -9,17 +9,22 @@ jobs:
     steps:
       - name: Baixar código
         uses: actions/checkout@v4
+
       - name: Configurar Java 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Instalar Google chrome
-        uses: browser-actions/setup-chrome@v1
+
       - name: Instalar dependencias
         run: mvn install -DskipTests
+
       - name: Rodar os testes
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
         run: mvn test -Dambiente=ci
+
       - name: Publicar o relatório
         if: always()
         uses: actions/upload-artifact@v4
