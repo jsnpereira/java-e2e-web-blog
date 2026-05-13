@@ -24,8 +24,6 @@ public class CalculadoraJurosCompostoPage {
     private By valorInvestidoLabel = By.id("valorInvestido");
     private By rendimentoTotalLabel = By.id("rendimentoTotal");
 
-
-
     public CalculadoraJurosCompostoPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
