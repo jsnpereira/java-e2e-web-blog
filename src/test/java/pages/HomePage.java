@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -20,10 +21,14 @@ public class HomePage {
     private By homePageTitle = By.xpath("//*[contains(@class,'menu-text') and contains(text(),'Agibank')]");
     private By calculadorasMenu = By.xpath("//span[text()=\"Calculadoras\"]");
     private By jurosCompostoSubmenu = By.xpath("//a[@class=\"menu-link\"]//span[text()=\"Calculadora de Juros Compostos\"]");
+    private By searchButton = By.className("ast-search-icon");
+    private By searchInput = By.className("search-field");
+    private By searchList = By.className("ast-live-search-results");
+    private By firstSearchList = By.xpath("//a[@class=\"ast-search-item\"][1]");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         this.actions = new Actions(driver);
     }
 
@@ -45,6 +50,24 @@ public class HomePage {
     public void clicarSubmenuJurosComposto () {
         wait.until(ExpectedConditions.presenceOfElementLocated(jurosCompostoSubmenu));
         driver.findElement(jurosCompostoSubmenu).click();
+    }
+
+    public void clicarSearchButton(){
+        wait.until(ExpectedConditions.presenceOfElementLocated((searchButton)));
+        driver.findElement(searchButton).click();
+    }
+
+    public void digitarSearchInput(String valor){
+        wait.until(ExpectedConditions.presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys(valor);
+    }
+
+    public void validarPrimeiroItemDaLista(String valor){
+        wait.until(ExpectedConditions.presenceOfElementLocated(searchList));
+        wait.until(ExpectedConditions.presenceOfElementLocated(firstSearchList));
+
+        boolean resultado = driver.findElement(firstSearchList).getText().contains(valor);
+        Assert.assertTrue(resultado);
     }
 
     public void loading() {
