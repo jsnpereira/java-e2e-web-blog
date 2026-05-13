@@ -15,6 +15,15 @@ public class DriverFactory {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
+
+            String ambiente = System.getProperty("ambiente","local");
+
+            if (ambiente.equals("ci")){
+                options.addArguments("--headless");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+            }
+
             System.setProperty("webdriver.chrome.silentOutput", "true");
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();

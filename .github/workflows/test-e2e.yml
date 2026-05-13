@@ -17,9 +17,9 @@ jobs:
       - name: Instalar Google chrome
         uses: browser-actions/setup-chrome@v1
       - name: Instalar dependencias
-        run: mvn dependency:resolve
+        run: mvn install -DskipTests
       - name: Rodar os testes
-        run: mvn test
+        run: mvn test -Dambiente=ci
       - name: Publicar o relatório
         if: always()
         uses: actions/upload-artifact@v4
